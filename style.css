@@ -45,6 +45,10 @@ body{
     height: 100px;
 }
 
+.click{
+    
+}
+
 @media (max-width: 335px){
     .container, .container-cards{
         width: 100%;

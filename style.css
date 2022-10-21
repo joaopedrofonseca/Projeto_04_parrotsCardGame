@@ -64,7 +64,6 @@ body{
 .hide{
     display: none;
 }
-
 .click{
     transform: rotateY(180deg);
 }

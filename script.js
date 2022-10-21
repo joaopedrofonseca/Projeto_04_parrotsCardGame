@@ -58,8 +58,14 @@ for( let i=0; i< cardNumbers; i++){
     cardsList.push(cardL);
 }
 
-/*function clickedCard(element){
+function clickedCard(element){
     element.classList.toggle("click");
-    element.classList.toggle('front');
-}*/
+    setTimeout(hideback, 300);
+    //div card deve rotacionar 
+}
 
+function hideback(backcard){
+    backcard = document.querySelector(".back");
+    backcard.classList.toggle("hide");
+
+}

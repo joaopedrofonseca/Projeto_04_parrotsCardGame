@@ -39,14 +39,34 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+
+    transition: 1s;
 }
-.card img{
+ img{
     width: 100px;
     height: 100px;
 }
 
+.back{
+    width: 117px;
+    height: 146px;
+    position: absolute;
+    background-color: #A7E9AF;
+    border: 1px solid #A7E9AF;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.hide{
+    display: none;
+}
+
 .click{
-    
+    transform: rotateY(180deg);
 }
 
 @media (max-width: 335px){

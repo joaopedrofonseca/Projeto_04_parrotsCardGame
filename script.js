@@ -4,23 +4,62 @@ let cardNumbers = Number(prompt("Jogo da Memória! Qual o número de cartas que 
         cardNumbers = Number(prompt("Jogo da Memória! Qual o número de cartas que deseja jogar? (4 a 14 cartas)"));
     }
 
+let containercardjs = document.querySelector(".container-cards");
+ let imgs = [
+    'bobrossparrot.gif',
+    'bobrossparrot.gif',
+
+    'explodyparrot.gif',
+    'explodyparrot.gif',
+
+    'fiestaparrot.gif',
+    'fiestaparrot.gif',
+
+    'metalparrot.gif',
+    'metalparrot.gif',
+
+    'revertitparrot.gif',
+    'revertitparrot.gif',
+
+    'tripletsparrot.gif',
+    'tripletsparrot.gif',
+
+    'unicornparrot.gif',
+    'unicornparrot.gif'
+]
+
+let  imgsrandom=[];
+for(let i = 0; i<cardNumbers; i++){
+    imgsrandom.push(imgs[i]);
+}
+
+function comparador() { 
+	return Math.random() - 0.5; 
+}
+
+imgsrandom.sort(comparador);
+
+
+for(let i = 0; i<cardNumbers; i++){
+    containercardjs.innerHTML += `
+    <div class="card" onclick="clickedCard(this)">
+        <img src="./imagens/${imgsrandom[i]}">
+        <div class="back">
+            <img src="./imagens/back.png">
+        </div>
+    </div>
+    `
+    ;
+}
+
 let cardsList = [];
 for( let i=0; i< cardNumbers; i++){
     let cardL = document.querySelector(".card");
     cardsList.push(cardL);
 }
-//ok
 
-let containercardjs = document.querySelector(".container-cards");
- containercardjs.innerHTML = '';
-for(let i = 0; i<cardsList.length; i++){
-    containercardjs.innerHTML += `<div class="card" onclick="clickedCard(this)">
-    <img src="./Arquivos Úteis - Projeto 04 - Parrot Card Game/back.png">
-    </div>`
-    ;
-}
+/*function clickedCard(element){
+    element.classList.toggle("click");
+    element.classList.toggle('front');
+}*/
 
-function clickedCard(element){
-    const flipCard = document.querySelector(element);
-    flipCard.classList.toggle("click");
-}

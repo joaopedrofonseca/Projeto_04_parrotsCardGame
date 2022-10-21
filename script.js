@@ -52,20 +52,13 @@ for(let i = 0; i<cardNumbers; i++){
     ;
 }
 
-let cardsList = [];
-for( let i=0; i< cardNumbers; i++){
-    let cardL = document.querySelector(".card");
-    cardsList.push(cardL);
-}
-
 function clickedCard(element){
     element.classList.toggle("click");
-    setTimeout(hideback, 300);
-    //div card deve rotacionar 
+    setTimeout(hideback, 300, element);
 }
 
-function hideback(backcard){
-    backcard = document.querySelector(".back");
+function hideback(element){
+    const backcard = element.querySelector(".back");
     backcard.classList.toggle("hide");
 
 }

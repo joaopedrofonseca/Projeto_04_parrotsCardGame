@@ -6,26 +6,26 @@ let cardNumbers = Number(prompt("Jogo da Memória! Qual o número de cartas que 
 
 let containercardjs = document.querySelector(".container-cards");
  let imgs = [
-    'bobrossparrot.gif',
-    'bobrossparrot.gif',
+    'bobrossparrot',
+    'bobrossparrot',
 
-    'explodyparrot.gif',
-    'explodyparrot.gif',
+    'explodyparrot',
+    'explodyparrot',
 
-    'fiestaparrot.gif',
-    'fiestaparrot.gif',
+    'fiestaparrot',
+    'fiestaparrot',
 
-    'metalparrot.gif',
-    'metalparrot.gif',
+    'metalparrot',
+    'metalparrot',
 
-    'revertitparrot.gif',
-    'revertitparrot.gif',
+    'revertitparrot',
+    'revertitparrot',
 
-    'tripletsparrot.gif',
-    'tripletsparrot.gif',
+    'tripletsparrot',
+    'tripletsparrot',
 
-    'unicornparrot.gif',
-    'unicornparrot.gif'
+    'unicornparrot',
+    'unicornparrot'
 ]
 
 let  imgsrandom=[];
@@ -42,8 +42,8 @@ imgsrandom.sort(comparador);
 
 for(let i = 0; i<cardNumbers; i++){
     containercardjs.innerHTML += `
-    <div class="card" onclick="clickedCard(this)">
-        <img src="./imagens/${imgsrandom[i]}">
+    <div class="card" id="${imgsrandom[i]}" onclick="clickedCard(this)">
+        <img src="./imagens/${imgsrandom[i]}.gif">
         <div class="back">
             <img src="./imagens/back.png">
         </div>
@@ -53,12 +53,81 @@ for(let i = 0; i<cardNumbers; i++){
 }
 
 function clickedCard(element){
-    element.classList.toggle("click");
-    setTimeout(hideback, 300, element);
+    if(activatedCard === false){firstClickedCard(element);
+    } else{
+        secondClickedCard(element);
+    }
 }
 
 function hideback(element){
     const backcard = element.querySelector(".back");
-    backcard.classList.toggle("hide");
+    backcard.classList.add("hide");
 
 }
+
+
+let playTimes = 0;
+let activatedCard = false;
+let firstcardName;
+let cardsPlayed = [];
+let successfullPlay = Number(0);
+
+
+function firstClickedCard(element){
+
+        element.classList.add("click");
+        setTimeout(hideback, 300, element);
+        activatedCard = true;
+
+        firstcardName = element.id;
+        cardsPlayed.push(element);
+        playTimes++;
+    }
+
+function secondClickedCard(element){
+    element.classList.add("click");
+    setTimeout(hideback, 300, element);
+
+    if(element.id === firstcardName){
+        playTimes++;
+        activatedCard = false;
+        cardsPlayed.shift();
+        successfullPlay++;
+    } else{
+        playTimes++;
+        activatedCard = false;
+        cardsPlayed.push(element);
+        setTimeout(untapCards,1000);
+    }
+}
+function untapCards(){
+    for(let i =  0; i<cardsPlayed.length; i++){
+    cardsPlayed[i].classList.remove("click");
+    //setTimeout(removeHide, 300, b);
+    let back = cardsPlayed[i].querySelector(".back");
+    back.classList.remove('hide');
+    }
+
+
+    cardsPlayed.shift();
+    cardsPlayed.shift();
+
+}
+
+function removeHide(back){
+        for(let i=0; i<cardsPlayed.length;i++){
+        let back = cardsPlayed[i].querySelector(".back");
+        back.classList.remove('hide');
+    }
+}
+
+let pairs = Number(cardNumbers/2);
+let endGame = false;
+
+if(pairs === successfullPlay){
+    endGame = true;
+    if(endGame == true){
+        alert("Você ganhou em "+playTimes+" jogadas!");
+    }
+}
+

@@ -57,6 +57,7 @@ function clickedCard(element){
     } else{
         secondClickedCard(element);
     }
+
 }
 
 function hideback(element){
@@ -71,10 +72,13 @@ let activatedCard = false;
 let firstcardName;
 let cardsPlayed = [];
 let successfullPlay = Number(0);
+let pairs = Number(cardNumbers/2);
+let endGame = false;
+
 
 
 function firstClickedCard(element){
-
+        element.classList.remove("flip");
         element.classList.add("click");
         setTimeout(hideback, 300, element);
         activatedCard = true;
@@ -85,14 +89,17 @@ function firstClickedCard(element){
     }
 
 function secondClickedCard(element){
+    element.classList.remove("flip");   
     element.classList.add("click");
     setTimeout(hideback, 300, element);
 
     if(element.id === firstcardName){
         playTimes++;
         activatedCard = false;
-        cardsPlayed.shift();
         successfullPlay++;
+        cardsPlayed.shift();
+        setTimeout(endgame,1000);
+        
     } else{
         playTimes++;
         activatedCard = false;
@@ -100,34 +107,23 @@ function secondClickedCard(element){
         setTimeout(untapCards,1000);
     }
 }
+
 function untapCards(){
     for(let i =  0; i<cardsPlayed.length; i++){
     cardsPlayed[i].classList.remove("click");
-    //setTimeout(removeHide, 300, b);
+    cardsPlayed[i].classList.add("flip");
     let back = cardsPlayed[i].querySelector(".back");
-    back.classList.remove('hide');
+    back.classList.remove("hide");
     }
-
-
     cardsPlayed.shift();
     cardsPlayed.shift();
-
 }
 
-function removeHide(back){
-        for(let i=0; i<cardsPlayed.length;i++){
-        let back = cardsPlayed[i].querySelector(".back");
-        back.classList.remove('hide');
+function endgame(){
+    if(pairs === successfullPlay){
+        endGame = true;
+        if(endGame === true && cardsPlayed[1] === undefined){
+            alert("Você ganhou em "+playTimes+" jogadas!");
+        }
     }
 }
-
-let pairs = Number(cardNumbers/2);
-let endGame = false;
-
-if(pairs === successfullPlay){
-    endGame = true;
-    if(endGame == true){
-        alert("Você ganhou em "+playTimes+" jogadas!");
-    }
-}
-

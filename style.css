@@ -40,8 +40,10 @@ body{
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: all 0.5s;
+    transform-style: preserve-3d;
 
-    transition: 1s;
+
 }
  img{
     width: 100px;
@@ -63,11 +65,17 @@ body{
 
 .hide{
     display: none;
-}
-.click{
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
+    
 }
 
+.click{
+    transform: rotateY(180deg);
+    transition: 1s;
+}
+.flip{
+    transform: rotate(0deg);
+}
 @media (max-width: 335px){
     .container, .container-cards{
         width: 100%;
